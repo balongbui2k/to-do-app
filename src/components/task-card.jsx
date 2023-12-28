@@ -1,51 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { taskStatus } from "../utils/constant";
 import { IconClose } from "./icons";
 
 const TaskCard = ({ task, onRemoveTask, onEditText, onChangeStatus }) => {
   const [isEditing, setEditing] = useState(false);
-  const [newName, setNewName] = useState("");
-  const [newDescription, setNewDescription] = useState("");
+  const [textEdit, setTextEdit] = useState({ newName: "", newDescription: "" });
 
   const handleChangeNewName = (e) => {
-    setNewName(e.target.value);
+    setTextEdit({ ...textEdit, newName: e.target.value });
   };
 
   const handleChangeNewDescription = (e) => {
-    setNewDescription(e.target.value);
+    setTextEdit({ ...textEdit, newDescription: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!newName.trim() && !newDescription.trim()) return;
+  const handleSubmit = () => {
+    if (!textEdit.newName.trim() || !textEdit.newDescription.trim()) return;
 
-    onEditText(task.id, newName, newDescription);
-    setNewName("");
-    setNewDescription("");
+    onEditText(task.id, textEdit.newName, textEdit.newDescription);
     setEditing(false);
   };
 
+  useEffect(() => {
+    setTextEdit({ newName: task.name, newDescription: task.description });
+  }, []);
+
   const editingTemplate = (
-    <form className="flex flex-col space-y-2 " onSubmit={handleSubmit}>
-      <label className="text-gray-700" htmlFor={task.id}>
-        New name for {task.name}
-      </label>
+    <div className="flex flex-col space-y-2 ">
+      <label className="text-gray-700">New name for {task.name}</label>
       <input
         id={task.id}
         className="border border-gray-400 p-2 rounded"
         type="text"
-        // value={newName}
         onChange={handleChangeNewName}
         defaultValue={task.name}
       />
-      <label className="text-gray-700" htmlFor={task.id}>
-        New name for {task.description}
-      </label>
+      <label className="text-gray-700">New name for {task.description}</label>
       <input
         id={task.id}
         className="border border-gray-400 p-2 rounded"
         type="text"
-        // value={newDescription}
         defaultValue={task.description}
         onChange={handleChangeNewDescription}
       />
@@ -58,23 +52,19 @@ const TaskCard = ({ task, onRemoveTask, onEditText, onChangeStatus }) => {
           Cancel
         </button>
         <button
-          type="submit"
+          onClick={handleSubmit}
           className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded"
         >
           Save
         </button>
       </div>
-    </form>
+    </div>
   );
 
   const viewTemplate = (
     <div className="flex flex-col space-y-2 ">
-      <label className="text-gray-700" htmlFor={task.id}>
-        {task.name}
-      </label>
-      <label className="text-gray-700" htmlFor={task.id}>
-        {task.description}
-      </label>
+      <label className="text-gray-700">{task.name}</label>
+      <label className="text-gray-700">{task.description}</label>
       <div className="p-2 left-[260px] grid grid-cols-3 z-10 gap-6">
         <button
           type="button"

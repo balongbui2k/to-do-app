@@ -20,99 +20,51 @@ const generateId = (length = 10) => {
 };
 
 export default function App() {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [textChange, setTextChange] = useState({
+    nameChange: "",
+    newDescription: "",
+  });
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     setTasks([
       {
         id: "UmqcWWFy14",
-        name: "asda",
-        description: "asdad",
+        name: "hehe",
+        description: "hehehe",
         status: "todo",
-      },
-      {
-        id: "iDpH0wQLq8",
-        name: "a",
-        description: "ab",
-        status: "inProgress",
-      },
-      {
-        id: "le4GMFqIV7",
-        name: "b",
-        description: "vc",
-        status: "inProgress",
-      },
-      {
-        id: "cm8CqoDqJp",
-        name: "f",
-        description: "sf",
-        status: "todo",
-      },
-      {
-        id: "Fqky3zOBkI",
-        name: "ad",
-        description: "dg",
-        status: "todo",
-      },
-      {
-        id: "AJZibqn9DQ",
-        name: "AD",
-        description: "Dsdfgsd",
-        status: "completed",
-      },
-      {
-        id: "p05AdsR4qH",
-        name: "ASFA",
-        description: "SDFGSG",
-        status: "completed",
-      },
-      {
-        id: "I4LmQx6D3T",
-        name: "ssf",
-        description: "sdfsf",
-        status: "inProgress",
-      },
-      {
-        id: "o3t7P8CMjX",
-        name: "ASDsd",
-        description: "aSDf",
-        status: "completed",
       },
     ]);
   }, []);
 
   const handleChangeName = (e) => {
-    setName(e.target.value);
+    setTextChange({ ...textChange, nameChange: e.target.value });
   };
   const handleChangeDescription = (e) => {
-    setDescription(e.target.value);
+    setTextChange({ ...textChange, descriptionChange: e.target.value });
   };
 
   const handleAddTask = () => {
-    if (tasks.some((task) => task.name === name)) return;
-    if (tasks.some((task) => task.description === description)) return;
-    if (!name.trim() && !description.trim()) {
-      return alert("Name và Description không được để trống");
-    }
+    if (tasks.some((task) => task.name === textChange.nameChange)) return;
+    if (tasks.some((task) => task.description === textChange.descriptionChange))
+      return;
+    if (!textChange.nameChange.trim() || !textChange.descriptionChange.trim())
+      return;
 
     setTasks([
       ...tasks,
       {
         id: generateId(),
-        name,
-        description,
+        name: textChange.nameChange,
+        description: textChange.descriptionChange,
         status: taskStatus.todo,
       },
     ]);
-    setName("");
-    setDescription("");
+    setTextChange({ nameChange: "", descriptionChange: "" });
   };
 
   const handleRemoveTask = (id) => {
     const removeTasks = tasks.filter((task) => task.id !== id);
-    console.log("removeTasks:", removeTasks);
     setTasks(removeTasks);
   };
 
@@ -149,13 +101,13 @@ export default function App() {
         <CustomTextInput
           placeholder={"Name"}
           type={"text"}
-          value={name}
+          value={textChange.nameChange}
           onChange={handleChangeName}
         />
         <CustomTextInput
           placeholder={"Task description"}
           type={"text"}
-          value={description}
+          value={textChange.descriptionChange}
           onChange={handleChangeDescription}
         />
         <CustomButton name={"Add task"} onClick={handleAddTask} />

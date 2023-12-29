@@ -20,10 +20,8 @@ const generateId = (length = 10) => {
 };
 
 export default function App() {
-  const [textChange, setTextChange] = useState({
-    nameChange: "",
-    newDescription: "",
-  });
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -34,34 +32,76 @@ export default function App() {
         description: "hehehe",
         status: "todo",
       },
+      {
+        id: "147YaYxkwk",
+        name: "ádas",
+        description: "longqwqe",
+        status: "todo",
+      },
+      {
+        id: "GOySsmt5WE",
+        name: "adad",
+        description: "ádasd",
+        status: "todo",
+      },
+      {
+        id: "vZLa4x95NQ",
+        name: "âfa",
+        description: "daasdasd",
+        status: "todo",
+      },
+      {
+        id: "u4z7E55dgZ",
+        name: "ấdfas",
+        description: "àdasfd",
+        status: "todo",
+      },
+      {
+        id: "FUZI3GYdl2",
+        name: "ADa",
+        description: "ADadDS",
+        status: "todo",
+      },
+      {
+        id: "CorMp5gvSf",
+        name: "SDSD",
+        description: "SDSDS",
+        status: "todo",
+      },
+      {
+        id: "I9Yvnkll5s",
+        name: "ÁDA",
+        description: "ADASD",
+        status: "todo",
+      },
     ]);
   }, []);
 
   const handleChangeName = (e) => {
-    setTextChange({ ...textChange, nameChange: e.target.value });
+    setName(e.target.value);
   };
   const handleChangeDescription = (e) => {
-    setTextChange({ ...textChange, descriptionChange: e.target.value });
+    setDescription(e.target.value);
   };
 
   const handleAddTask = () => {
-    if (tasks.some((task) => task.name === textChange.nameChange)) return;
-    if (tasks.some((task) => task.description === textChange.descriptionChange))
-      return;
-    if (!textChange.nameChange.trim() || !textChange.descriptionChange.trim())
-      return;
+    if (tasks.some((task) => task.name === name)) return;
+    if (tasks.some((task) => task.description === description)) return;
+    if (!name.trim() && !description.trim()) return;
 
     setTasks([
       ...tasks,
       {
         id: generateId(),
-        name: textChange.nameChange,
-        description: textChange.descriptionChange,
+        name,
+        description,
         status: taskStatus.todo,
       },
     ]);
-    setTextChange({ nameChange: "", descriptionChange: "" });
+    setName("");
+    setDescription("");
   };
+  console.log("tasks:", tasks);
 
   const handleRemoveTask = (id) => {
     const removeTasks = tasks.filter((task) => task.id !== id);
@@ -96,24 +136,39 @@ export default function App() {
   };
 
   return (
-    <div className="container mx-auto ">
-      <div className="flex justify-end my-4">
+    <div className="container mx-auto">
+      <div
+        className="my-4 gap-4 mobile:flex-col sticky top-0 p-2 bg-white z-50
+                  mobile:mx-3 mobile:flex
+                  tablet:flex tablet:mx-3
+                  surface:flex surface:mx-3
+                  laptop:flex laptop:gap-4 laptop:mx-3 laptop:justify-end
+                  desktop:flex desktop:mx-3 desktop:justify-end
+                  lg-desktop:flex lg-desktop:mx-3 lg-desktop:justify-end "
+      >
         <CustomTextInput
           placeholder={"Name"}
           type={"text"}
-          value={textChange.nameChange}
+          value={name}
           onChange={handleChangeName}
         />
         <CustomTextInput
           placeholder={"Task description"}
           type={"text"}
-          value={textChange.descriptionChange}
+          value={description}
           onChange={handleChangeDescription}
         />
         <CustomButton name={"Add task"} onClick={handleAddTask} />
       </div>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div
+        className="grid grid-cols-3 gap-4
+                  mobile:mx-3 mobile:grid-cols-1
+                  tablet:grid-cols-1 tablet:grid
+                  surface:grid-cols-1 surface:grid
+                  laptop:grid-cols-2 laptop:grid laptop:mx-3
+                  desktop:grid desktop:grid-cols-3 desktop:mx-3"
+      >
         <TodoScreen title={"Todo"}>
           {tasks
             .filter((item) => item.status === taskStatus.todo)

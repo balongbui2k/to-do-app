@@ -62,7 +62,7 @@ const TaskCard = ({ task, onRemoveTask, onEditText, onChangeStatus }) => {
   );
 
   const viewTemplate = (
-    <div className="flex flex-col space-y-2 ">
+    <div className="flex flex-col space-y-2">
       <label className="text-gray-700">{task.name}</label>
       <label className="text-gray-700">{task.description}</label>
       <div className="p-2 left-[260px] grid grid-cols-3 z-10 gap-6">
@@ -84,7 +84,7 @@ const TaskCard = ({ task, onRemoveTask, onEditText, onChangeStatus }) => {
 
         {task.status !== taskStatus.inProgress && (
           <button
-            className="bg-yellow-500 hover:bg-yellow-500/80 text-white p-1  rounded"
+            className="bg-yellow-500 hover:bg-yellow-500/80 text-white p-1 rounded"
             onClick={() => onChangeStatus(task.id, taskStatus.inProgress)}
           >
             Inprogress
@@ -106,7 +106,7 @@ const TaskCard = ({ task, onRemoveTask, onEditText, onChangeStatus }) => {
   return (
     <div className="relative border border-black-400 rounded-lg mx-4 my-4 drop-shadow-md p-4 bg-white">
       <div
-        className="absolute top-0 right-0 p-1 hover:opacity-70"
+        className="absolute top-0 right-0 p-1 hover:opacity-70 cursor-pointer "
         onClick={onRemoveTask}
       >
         <IconClose />

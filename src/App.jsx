@@ -28,51 +28,21 @@ export default function App() {
     setTasks([
       {
         id: "UmqcWWFy14",
-        name: "hehe",
-        description: "hehehe",
+        name: "Coding",
+        description: "Practicing with React project",
         status: "todo",
       },
       {
         id: "147YaYxkwk",
-        name: "ádas",
-        description: "longqwqe",
-        status: "todo",
+        name: "Go to supermarket",
+        description: "Buy eggs and some vegetables",
+        status: "inProgress",
       },
       {
         id: "GOySsmt5WE",
-        name: "adad",
-        description: "ádasd",
-        status: "todo",
-      },
-      {
-        id: "vZLa4x95NQ",
-        name: "âfa",
-        description: "daasdasd",
-        status: "todo",
-      },
-      {
-        id: "u4z7E55dgZ",
-        name: "ấdfas",
-        description: "àdasfd",
-        status: "todo",
-      },
-      {
-        id: "FUZI3GYdl2",
-        name: "ADa",
-        description: "ADadDS",
-        status: "todo",
-      },
-      {
-        id: "CorMp5gvSf",
-        name: "SDSD",
-        description: "SDSDS",
-        status: "todo",
-      },
-      {
-        id: "I9Yvnkll5s",
-        name: "ÁDA",
-        description: "ADASD",
-        status: "todo",
+        name: "Clean the house",
+        description: "Sweep the floor, washing dishes ",
+        status: "completed",
       },
     ]);
   }, []);

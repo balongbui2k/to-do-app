@@ -63,8 +63,8 @@ const TaskCard = ({ task, onRemoveTask, onEditText, onChangeStatus }) => {
 
   const viewTemplate = (
     <div className="flex flex-col space-y-2">
-      <label className="text-gray-700">{task.name}</label>
-      <label className="text-gray-700">{task.description}</label>
+      <label className="text-gray-700 text-md font-bold">{task.name}</label>
+      <label className="text-gray-700 text-sm">{task.description}</label>
       <div className="p-2 left-[260px] grid grid-cols-3 z-10 gap-6">
         <button
           type="button"

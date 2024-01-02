@@ -8,7 +8,7 @@ const TodoScreen = ({ title, children }) => {
       desktop:mx-3
       lg-desktop:mx-3"
     >
-      <p className="text-center bg-rose-300 mb-1">{title}</p>
+      <p className="text-center bg-rose-300 mb-1 text-lg ">{title}</p>
       <div>{children}</div>
     </div>
   );

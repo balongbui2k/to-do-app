@@ -5,7 +5,7 @@ const CustomTextInput = ({ placeholder, type, value, onChange }) => {
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className="border border-solid border-gray-400 rounded "
+      className="border border-solid border-gray-400 rounded px-2"
     />
   );
 };
